@@ -131,28 +131,6 @@ run_PERSIANN_MTL_MultiInput(model, train_dataset, val_dataset, device,
                             loss_break=loss_break,
                             early_stop=early_stop, stop_after=stop_after)
 
-# Strategy(WES)
-strategy = {
-    "rainmask_start":0, "rainmask_end":20,
-    "mix_start":20, "mix_end":60,
-    "wes_start": 60, "wes_end": 150,
-
-    "rainrate_start":230, "rainrate_end":250,
-    "weighted_mix_start":150, "weighted_mix_end":200, 
-    "cloudwater_start":210, "cloudwater_end":220,
-    "cloudice_start":220, "cloudice_end":230
-    }
-
-model = PersiannMTLMultiInput_CW().to(device)
-MTLloss = MTLLoss_CW
-run_PERSIANN_MTL_MultiInput(model, train_dataset, val_dataset, device,
-                            MTLloss, strategy, loss_weight, 
-                            cloud_type="CW", batch_size = num_batch_size, epoch = num_epoch,
-                            opt = "Adam", lr=0.0001, 
-                            save_dir = f"./output/{exp_name}/PERSIAN_MTMI_CW_Strategy(WES)",
-                            loss_break=loss_break,
-                            early_stop=early_stop, stop_after=stop_after)
-
 
 # Strategy & Weigted loss
 strategy = {
@@ -174,27 +152,6 @@ run_PERSIANN_MTL_MultiInput(model, train_dataset, val_dataset, device,
                             loss_break=loss_break,
                             early_stop=early_stop, stop_after=stop_after)
 
-
-# Strategy(WES) & Weighting
-strategy = {
-    "rainmask_start":0, "rainmask_end":20,
-    "mix_start":20, "mix_end":50,
-    "weighted_mix_start":50, "weighted_mix_end":80,
-    "wes_start": 80, "wes_end": 150,
-    
-    "rainrate_start":150, "rainrate_end":200,
-    "cloudwater_start":210, "cloudwater_end":220,
-    "cloudice_start":220, "cloudice_end":230
-    }
-model = PersiannMTLMultiInput_CW().to(device)
-MTLloss = MTLLoss_CW_AccordanceWeighting
-run_PERSIANN_MTL_MultiInput(model, train_dataset, val_dataset, device,
-                            MTLloss, strategy, loss_weight, 
-                            cloud_type="CW", batch_size = num_batch_size, epoch = num_epoch,
-                            opt = "Adam", lr=0.0001, 
-                            save_dir = f"./output/{exp_name}/PERSIAN_MTMI_CW_Weighting_Strategy(WES)",
-                            loss_break=loss_break,
-                            early_stop=early_stop, stop_after=stop_after)
 
 print("Done. Model training...")
 
